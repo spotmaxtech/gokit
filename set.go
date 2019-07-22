@@ -167,13 +167,6 @@ func (set *threadUnsafeSet) Difference(other Set) Set {
 	return &difference
 }
 
-func (set *threadUnsafeSet) SymmetricDifference(other Set) Set {
-	_ = other.(*threadUnsafeSet)
-
-	aDiff := set.Difference(other)
-	bDiff := other.Difference(set)
-	return aDiff.Union(bDiff)
-}
 
 func (set *threadUnsafeSet) Clear() {
 	*set = newThreadUnsafeSet()

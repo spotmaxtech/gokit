@@ -14,3 +14,21 @@ func TestSet(t *testing.T) {
 		So(set.Contains("a"), ShouldBeTrue)
 	})
 }
+
+func Test_Iterator(t *testing.T) {
+	a := NewSet()
+
+	a.Add("Z")
+	a.Add("Y")
+	a.Add("X")
+	a.Add("W")
+
+	b := NewSet()
+	for val := range a.Iterator().C {
+		b.Add(val)
+	}
+
+	if !a.Equal(b) {
+		t.Error("The sets are not equal after iterating (Iterator) through the first set")
+	}
+}

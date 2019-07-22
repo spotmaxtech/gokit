@@ -47,21 +47,6 @@ func NewElasticHook(client *elastic.Client, host string, level logrus.Level, ind
 
 	ctx, cancel := context.WithCancel(context.TODO())
 
-	// Use the IndexExists service to check if a specified index exists.
-	exists, err := client.IndexExists(index).Do(ctx)
-	if err != nil {
-		return nil, err
-	}
-	if !exists {
-		createIndex, err := client.CreateIndex(index).Do(ctx)
-		if err != nil {
-			return nil, err
-		}
-		if !createIndex.Acknowledged {
-			return nil, ErrESCreateIndex
-		}
-	}
-
 	return &ElasticHook{
 		client:    client,
 		host:      host,
