@@ -20,6 +20,5 @@ before_install:
   - docker run -d -p 7777:9200 -e "discovery.type=single-node" --name elk docker.elastic.co/elasticsearch/elasticsearch:7.0.0
   - docker logs elk
   - docker inspect elk
-  - travis_wait 3
 
 script: go build
