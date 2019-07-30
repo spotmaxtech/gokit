@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/spotmaxtech/gokit.svg?branch=master)](https://travis-ci.org/spotmaxtech/gokit)
+
 # About go kit
 Frequently used by spot max team
 
