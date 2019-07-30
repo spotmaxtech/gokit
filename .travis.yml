@@ -1,7 +1,7 @@
 sudo: required
 language: go
 go:
-    - stable
+  - stable
 
 notifications:
   email:
@@ -10,6 +10,9 @@ notifications:
 
 services:
   - docker
+
+env:
+  - GO111MODULE=on
 
 before_script:
   # for elastic search: https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html
