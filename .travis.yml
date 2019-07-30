@@ -22,7 +22,6 @@ before_install:
   - travis_wait 5
 
 install:
-  - go get -v ./...
   - travis_wait 5
 
 script: go build
