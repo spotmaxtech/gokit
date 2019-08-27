@@ -95,10 +95,10 @@ type Set interface {
 }
 
 type threadUnsafeSet map[interface{}]struct{}
+
 func newThreadUnsafeSet() threadUnsafeSet {
 	return make(threadUnsafeSet)
 }
-
 
 func (set *threadUnsafeSet) Add(i interface{}) bool {
 	_, found := (*set)[i]
@@ -118,7 +118,6 @@ func (set *threadUnsafeSet) Contains(i ...interface{}) bool {
 	}
 	return true
 }
-
 
 func (set *threadUnsafeSet) Union(other Set) Set {
 	o := other.(*threadUnsafeSet)
@@ -166,7 +165,6 @@ func (set *threadUnsafeSet) Difference(other Set) Set {
 	}
 	return &difference
 }
-
 
 func (set *threadUnsafeSet) Clear() {
 	*set = newThreadUnsafeSet()
@@ -249,7 +247,6 @@ func (set *threadUnsafeSet) String() string {
 	return fmt.Sprintf("Set{%s}", strings.Join(items, ", "))
 }
 
-
 func (set *threadUnsafeSet) Pop() interface{} {
 	for item := range *set {
 		delete(*set, item)
@@ -306,7 +303,6 @@ func (set *threadUnsafeSet) UnmarshalJSON(b []byte) error {
 
 	return nil
 }
-
 
 func NewSet(s ...interface{}) Set {
 	set := newThreadUnsafeSet()
