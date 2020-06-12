@@ -47,3 +47,14 @@ func (c *Consul) PutKey(key string, value []byte) error {
 	_, err := c.kv.Put(pair, nil)
 	return err
 }
+
+func (c *Consul) GetList(key string) (api.KVPairs, error){
+	pair, _, err := c.kv.List(key, nil)
+	if err != nil {
+		return nil, err
+	}
+	if len(pair) == 0 {
+		return nil, ErrConsulKeyNotExist
+	}
+	return pair, nil
+}
