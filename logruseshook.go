@@ -97,7 +97,7 @@ func (hook *ElasticHook) Fire(entry *logrus.Entry) error {
 	_, err := hook.client.
 		Index().
 		Index(index).
-		Type("log").
+		// Type("log").
 		BodyJson(msg).
 		Do(hook.ctx)
 	return err
