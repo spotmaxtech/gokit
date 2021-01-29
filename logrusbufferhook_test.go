@@ -15,25 +15,18 @@ func TestLogrusBufferHook(t *testing.T) {
 
 		logrus.AddHook(hook)
 
-		logrus.WithFields(logrus.Fields{
-			"name": "spotmax",
-			"age":  15,
-		}).Warn("Hello world! 1")
-
+		logrus.Warn("Hello world! 1")
 		logrus.Info("Hello world! 2")
 		logrus.Debug("Hello world! 3")
 		logrus.Info("Hello world! 4")
 		logrus.Info("Hello world! 5")
 		logrus.Info("Hello world! 6")
 		logrus.Info("Hello world! 7")
-		logrus.WithFields(logrus.Fields{
-			"name": "spotmax",
-			"age":  16,
-		}).Warn("Hello world! 8")
+		logrus.Warn("Hello world! 8")
 
 		logs := buffer.Read()
 		for _, l := range logs {
-			fmt.Println(l)
+			fmt.Println(l.Timestamp, l.Level, l.Message)
 		}
 	})
 }
