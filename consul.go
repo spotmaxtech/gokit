@@ -48,7 +48,7 @@ func (c *Consul) PutKey(key string, value []byte) error {
 	return err
 }
 
-func (c *Consul) GetList(key string) (api.KVPairs, error){
+func (c *Consul) GetList(key string) (api.KVPairs, error) {
 	pair, _, err := c.kv.List(key, nil)
 	if err != nil {
 		return nil, err

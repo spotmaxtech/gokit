@@ -4,8 +4,14 @@ import (
 	"sync"
 )
 
+type RingBufferData struct {
+	Timestamp string `json:"timestamp"`
+	Message   string `json:"message"`
+	Level     string `json:"level"`
+}
+
 type RingBuffer struct {
-	buf  []string
+	buf  []*RingBufferData
 	size int
 	w    int // next position to write
 	mu   sync.Mutex
@@ -16,15 +22,12 @@ func NewRingBuffer(size int) *RingBuffer {
 		panic("buffer size must larger than 0 !!!")
 	}
 	return &RingBuffer{
-		buf:  make([]string, size),
+		buf:  make([]*RingBufferData, size),
 		size: size,
 	}
 }
 
-func (r *RingBuffer) Write(p string) {
-	if len(p) == 0 {
-		return
-	}
+func (r *RingBuffer) Write(p *RingBufferData) {
 
 	r.mu.Lock()
 	r.buf[r.w] = p
@@ -37,14 +40,14 @@ func (r *RingBuffer) Write(p string) {
 	return
 }
 
-func (r *RingBuffer) Read() []string {
+func (r *RingBuffer) Read() []*RingBufferData {
 	r.mu.Lock()
-	var data []string
+	var data []*RingBufferData
 	for i, count := r.w-1, 0; count < r.size; {
 		if i < 0 {
 			i = r.size - 1
 		}
-		if r.buf[i] != "" {
+		if r.buf[i] != nil {
 			data = append(data, r.buf[i])
 		} else {
 			break

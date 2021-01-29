@@ -38,19 +38,13 @@ func (hook *LogrusBufferHook) Fire(entry *logrus.Entry) error {
 		}
 	}
 
-	msg := struct {
-		Timestamp string
-		Message   string
-		Data      logrus.Fields
-		Level     string
-	}{
+	msg := &RingBufferData{
 		entry.Time.UTC().Format(time.RFC3339Nano),
 		entry.Message,
-		entry.Data,
 		strings.ToUpper(level),
 	}
 
-	hook.buffer.Write(PrettifyJson(msg, false))
+	hook.buffer.Write(msg)
 	return nil
 }
 

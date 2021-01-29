@@ -7,16 +7,15 @@ import (
 
 func TestRingbuffer(t *testing.T) {
 	buf := NewRingBuffer(5)
-	buf.Write("a")
-	buf.Write("b")
-	buf.Write("c")
-	buf.Write("d")
-	buf.Write("e")
-	buf.Write("f")
-	buf.Write("g")
-	buf.Write("h")
-	buf.Write("j")
-	buf.Write("k")
-	fmt.Println(buf.Read())
-	fmt.Println(buf.Read())
+
+	// buf.Write(&RingBufferData{Message: "a", Level: "info"})
+	// buf.Write(&RingBufferData{Message: "b", Level: "info"})
+	// buf.Write(&RingBufferData{Message: "c", Level: "info"})
+	// buf.Write(&RingBufferData{Message: "d", Level: "info"})
+	// buf.Write(&RingBufferData{Message: "e", Level: "info"})
+	buf.Write(&RingBufferData{Message: "f", Level: "warn"})
+	buf.Write(&RingBufferData{Message: "g", Level: "info"})
+	buf.Write(&RingBufferData{Message: "h", Level: "info"})
+	fmt.Println(PrettifyJson(buf.Read(), false))
+	fmt.Println(PrettifyJson(buf.Read(), false))
 }
