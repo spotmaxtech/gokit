@@ -26,6 +26,23 @@ func NewConsul(address string) *Consul {
 	return consul
 }
 
+func NewConsulToken(address string, token string) *Consul {
+	config := api.DefaultConfig()
+	config.Address = address
+	config.Token = token
+	client, err := api.NewClient(config)
+	if err != nil {
+		panic("connect consul failed, err:" + err.Error())
+	}
+
+	consul := &Consul{
+		address: address,
+		health:  client.Health(),
+		kv:      client.KV(),
+	}
+	return consul
+}
+
 func (c *Consul) GetKey(key string) ([]byte, error) {
 	pair, _, err := c.kv.Get(key, nil)
 	if err != nil {

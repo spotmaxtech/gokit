@@ -92,3 +92,17 @@ func TestConsul_GetService(t *testing.T) {
 		t.Log(Prettify(entry))
 	})
 }
+
+func TestConsul_NewConsulToken(t *testing.T) {
+	Convey("test token", t, func() {
+		consul := NewConsulToken("", "")
+		key := "spotmax-test/foo"
+		err := consul.PutKey(key, []byte("bar"))
+		So(err, ShouldBeNil)
+		value, err := consul.GetKey(key)
+		So(err, ShouldBeNil)
+		So(string(value), ShouldEqual, "bar")
+		_, err = consul.kv.Delete(key, nil)
+		So(err, ShouldBeNil)
+	})
+}
