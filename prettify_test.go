@@ -1,7 +1,6 @@
 package gokit
 
 import (
-	"github.com/ghodss/yaml"
 	"testing"
 )
 
@@ -51,6 +50,5 @@ func TestPrettifyYaml(t *testing.T) {
 		School: school,
 		Hobbit: []string{"swim", "game"},
 	}
-	yStr, _ := yaml.Marshal(person)
-	t.Log(string(yStr))
+	t.Log(string(PrettifyYaml(person)))
 }
