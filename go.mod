@@ -3,6 +3,7 @@ module github.com/spotmaxtech/gokit
 go 1.12
 
 require (
+	github.com/ghodss/yaml v1.0.0
 	github.com/hashicorp/consul/api v1.1.0
 	github.com/olivere/elastic/v7 v7.0.4
 	github.com/sirupsen/logrus v1.4.2

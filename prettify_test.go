@@ -1,6 +1,7 @@
 package gokit
 
 import (
+	"github.com/ghodss/yaml"
 	"testing"
 )
 
@@ -38,4 +39,18 @@ func TestPrettifyJson(t *testing.T) {
 	t.Log(PrettifyJson(person, false))
 
 	t.Log(PrettifyJson([]*string{String("book"), String("bed")}, true))
+}
+
+func TestPrettifyYaml(t *testing.T) {
+	school := make(map[string]*string)
+	school["junior"] = String("junior school")
+	school["high"] = String("high school")
+	person := Person{
+		Age:    1,
+		Name:   String("jess"),
+		School: school,
+		Hobbit: []string{"swim", "game"},
+	}
+	yStr, _ := yaml.Marshal(person)
+	t.Log(string(yStr))
 }

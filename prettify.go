@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/ghodss/yaml"
 	"io"
 	"reflect"
 	"strings"
@@ -122,5 +123,11 @@ func PrettifyJson(i interface{}, indent bool) string {
 		str, _ = json.Marshal(i)
 	}
 
+	return string(str)
+}
+
+// Only for normal logging purpose, 4 space indent
+func PrettifyYaml(i interface{}) string {
+	str, _ := yaml.Marshal(i)
 	return string(str)
 }
